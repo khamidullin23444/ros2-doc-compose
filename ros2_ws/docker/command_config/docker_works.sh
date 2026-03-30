@@ -1,21 +1,13 @@
-#!/bin/bash
-
+CONTAINER_DIR=$(pwd)
 CONTAINER_NAME="ros2"
-
-# Основная команда для работы с Docker‑контейнером
-
-ROS2_DIR="$HOME/ros2_ws/docker"
-ROS2_VAR="source /opt/ros/jazzy/setup.bash"
-ROS2_FILE="$ROS2_DIR/docker-compose.yml"
-DOC_COMMAND="docker compose -f $ROS2_FILE exec $CONTAINER_NAME"
-DOC_COMMAND_ATTACH="docker compose -f $ROS2_FILE attach $CONTAINER_NAME"
-
-
+CONTAINER_VAR="source /opt/ros/jazzy/setup.bash"
+CONTAINER_FILE="$CONTAINER_DIR/docker-compose.yml"
+DOCKER_COMMAND="docker compose -f $CONTAINER_FILE exec $CONTAINER_NAME"
 
 # Функция для проверки состояния контейнера
 check_container_status() {
     # Проверяем, существует ли контейнер
-    if ! docker ps -a --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then 
+    if ! docker ps -a --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
         echo "Ошибка: Контейнер '$CONTAINER_NAME' не существует." >&2
         echo "Убедитесь, что вы выполнили 'docker compose up -d' в директории с docker-compose.yml" >&2
         echo "Пробуем запустить контейнер..."
@@ -43,17 +35,12 @@ if ! check_container_status; then
 fi
 
 
-
 # Если аргументов нет, запускаем интерактивную оболочку
 if [ $# -eq 0 ]; then
     # Добавляем /bin/bash к основной команде
-    eval $DOC_COMMAND_ATTACH
+    eval "$DOCKER_COMMAND /bin/bash"
 else
     # Сохраняем все переданные аргументы в переменную
     ARGUMENTS="$@"
-    eval "$DOC_COMMAND /bin/bash -c '$ROS2_VAR && ros2 $ARGUMENTS'"
+    eval "$DOC_COMMAND /bin/bash -c '$CONTAINER_VAR && $COMMAND_NAME $ARGUMENTS'"
 fi
-
-
-
-
