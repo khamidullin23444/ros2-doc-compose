@@ -41,7 +41,7 @@ docker --version
 
 . ./command_config/install_wizard.sh
 
-
+eval "docker compose up -d"
 
 echo "=== Установка завершена! ==="
 echo "Перезагрузите терминал или выполните: source $CONFIG_FILE"

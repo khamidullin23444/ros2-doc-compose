@@ -15,7 +15,7 @@ RUN chmod 0440 /etc/sudoers.d/$ROS_USERNAME
 RUN apt-get update && apt-get upgrade -y
 
 # Install a few important dependencies
-RUN apt install -y ros-jazzy-desktop
+RUN apt install -y ros-jazzy-ros-core ros-jazzy-ros-base ros-jazzy-demo-nodes-cpp
 
 RUN echo "source /opt/ros/jazzy/setup.bash" >> /home/$ROS_USERNAME/.bashrc
 ENV SHELL /bin/bash

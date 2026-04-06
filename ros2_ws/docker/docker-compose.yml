@@ -8,17 +8,13 @@ services:
         ROS_USER_GID: 1010
     image: ros2-jazzy-dev:latest
     container_name: ros2
-    network_mode: host
-    ipc: host
-    pid: host
     stdin_open: true
     tty: true
     working_dir: /home/ros2user/ros2_ws
     user: ros2user
 
     environment:
-      - ROS_DOMAIN_ID=42
-      - ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
+      - ROS_LOCALHOST_ONLY=0
       - DISPLAY=:0
       - LIBGL_ALWAYS_SOFTWARE=1
 
@@ -26,9 +22,6 @@ services:
       - workspace:/home/ros2user/ros2_ws
       - ./src:/home/ros2user/ros2_ws/src
       - /tmp/.X11-unix:/tmp/.X11-unix
-
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
 
     command: /bin/bash
