@@ -19,7 +19,7 @@ sudo apt install -y \
 
 # Добавление официального GPG‑ключа Docker
 echo "Добавляем GPG‑ключ Docker..."
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
 
 # Настройка репозитория Docker
 echo "Настраиваем репозиторий Docker..."
