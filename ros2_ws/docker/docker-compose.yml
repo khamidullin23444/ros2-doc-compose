@@ -23,9 +23,10 @@ services:
       - ./src:/home/ros2user/ros2_ws/src
       - /tmp/.X11-unix:/tmp/.X11-unix
 
+    devices:
+      - "/dev/serial0:/dev/serial0"
 
     command: /bin/bash
-
 
 volumes:
   workspace:
