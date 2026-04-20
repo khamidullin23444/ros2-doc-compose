@@ -12,9 +12,11 @@ services:
     tty: true
     working_dir: /home/ros2user/ros2_ws
     user: ros2user
+    network_mode: "host"
 
     environment:
       - ROS_LOCALHOST_ONLY=0
+      - ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET
       - DISPLAY=:0
       - LIBGL_ALWAYS_SOFTWARE=1
 
@@ -25,6 +27,7 @@ services:
 
     devices:
       - "/dev/serial0:/dev/serial0"
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
 
     command: /bin/bash
 
